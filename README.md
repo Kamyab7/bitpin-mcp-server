@@ -96,6 +96,37 @@ The MCP server provides the following tools:
    await app.RunAsync();
    ```
 
+## Testing
+
+The project includes comprehensive unit tests to ensure the reliability of the Bitpin client integration. The tests are organized into several categories:
+
+- **MarketData**: Tests for retrieving market information, tickers, orderbooks, and currency data
+- **Authentication**: Tests for token retrieval and refresh functionality
+- **UserData**: Tests for retrieving user wallet information
+- **OrderManagement**: Tests for retrieving, canceling, and managing orders
+- **OrderCreation**: Tests for creating different types of orders (limit, market, stop-limit, OCO)
+- **ErrorHandling**: Tests for proper handling of error conditions
+
+### Running the Tests
+
+To run the tests, use the following command:
+
+```bash
+dotnet test
+```
+
+To run tests from a specific category:
+
+```bash
+dotnet test --filter "Category=MarketData"
+```
+
+### Test Configuration
+
+The tests use a BitpinClientSettings configuration with API keys. For security reasons, these keys are masked in the test code. When running tests locally, replace the placeholder values with your actual API keys.
+
+> **Note**: Some tests that create real orders on the exchange are marked with `[Ignore]` to prevent accidental execution. These tests should only be run manually and with caution.
+
 ## Conclusion
 
 This MCP server provides an easy way to integrate with the Bitpin API and interact with your wallets, orders, and markets. You can place orders, retrieve market data, and manage your assets efficiently using these tools.

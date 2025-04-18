@@ -1,9 +1,10 @@
 ﻿using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics;
 
 namespace BitpinClient.Tests;
 
-public class Tests
+public class MarketInfoTests
 {
     private ServiceProvider _serviceProvider;
     private BitpinClientService _service;
@@ -11,17 +12,27 @@ public class Tests
     [SetUp]
     public void Setup()
     {
-        var serviceCollection = new ServiceCollection();
-        var settings = new BitpinClientSettings()
+        try
         {
-            Key = "****",
-            Secret = "****",
-        };
+            var serviceCollection = new ServiceCollection();
+            
+            // In a real environment, these would be loaded from environment variables or a secure configuration
+            var settings = new BitpinClientSettings()
+            {
+                Key = "****",
+                Secret = "****",
+            };
 
-        serviceCollection.AddBitpinClient(settings);
+            serviceCollection.AddBitpinClient(settings);
 
-        _serviceProvider = serviceCollection.BuildServiceProvider();
-        _service = _serviceProvider.GetRequiredService<BitpinClientService>();
+            _serviceProvider = serviceCollection.BuildServiceProvider();
+            _service = _serviceProvider.GetRequiredService<BitpinClientService>();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Test setup failed: {ex.Message}");
+            throw;
+        }
     }
 
     [TearDown]
@@ -31,6 +42,7 @@ public class Tests
     }
 
     [Test]
+    [Category("MarketData")]
     [TestCase(361)]
     public async Task Should_Return_All_The_Currencies_on_Bitpin(int expectedCurrenciesCount)
     {
@@ -41,6 +53,7 @@ public class Tests
     }
 
     [Test]
+    [Category("MarketData")]
     [TestCase(645)]
     public async Task Should_Return_All_The_Markets_on_Bitpin(int expectedMarketsCount)
     {
@@ -51,6 +64,7 @@ public class Tests
     }
 
     [Test]
+    [Category("MarketData")]
     [TestCase(645)]
     public async Task Should_Return_All_The_Tickers_on_Bitpin(int expectedTickersCount)
     {
@@ -61,6 +75,7 @@ public class Tests
     }
 
     [Test]
+    [Category("Authentication")]
     public async Task Should_Return_Token()
     {
         var result = await _service.GetTokenAsync();
@@ -71,7 +86,8 @@ public class Tests
     }
 
     [Test]
-    public async Task Should_Returned_User_Wallets()
+    [Category("UserData")]
+    public async Task Should_Return_User_Wallets()
     {
         var result = await _service.GetWalletsListAsync();
 
@@ -79,7 +95,9 @@ public class Tests
     }
 
     [Test]
+    [Category("MarketData")]
     [TestCase("BTC_IRT")]
+    [TestCase("ETH_IRT", Ignore = "Optional test case")]
     public async Task Should_Return_Matches_For_A_Symbol(string symbol)
     {
         var result = await _service.GetMatchesListAsync(symbol);
@@ -88,6 +106,7 @@ public class Tests
     }
 
     [Test]
+    [Category("Authentication")]
     public async Task Should_Refresh_The_Access_Token()
     {
         var token = await _service.GetTokenAsync();
@@ -99,6 +118,7 @@ public class Tests
     }
 
     [Test]
+    [Category("OrderManagement")]
     public async Task Should_Return_Completed_Orders()
     {
         var result = await _service.GetCompletedOrdersAsync();
@@ -106,6 +126,7 @@ public class Tests
     }
 
     [Test]
+    [Category("OrderManagement")]
     public async Task Should_Return_Pending_Orders()
     {
         var result = await _service.GetPendingOrdersAsync();
@@ -113,6 +134,7 @@ public class Tests
     }
 
     [Test]
+    [Category("OrderManagement")]
     public async Task Should_Return_The_Orders()
     {
         var result = await _service.GetOrderListAsync();
@@ -121,8 +143,9 @@ public class Tests
         result.Count().Should().NotBe(0);
     }
 
-    [Ignore("")]
     [Test]
+    [Ignore("This test cancels a real order on the exchange and should only be run manually")]
+    [Category("OrderManagement")]
     [TestCase(1)]
     public async Task Should_Cancel_A_Pending_Order(int orderId)
     {
@@ -130,16 +153,18 @@ public class Tests
     }
 
     [Test]
+    [Category("OrderManagement")]
     [TestCase(1061895427)]
-    public async Task Should_Return_A_Order(int orderId)
+    public async Task Should_Return_An_Order(int orderId)
     {
         var result = await _service.GetOrderByIdAsync(orderId);
         result.Should().NotBeNull();
     }
 
-    [Ignore("This test creates a real limit order on the exchange. Since it would create actual orders each time it runs, it's skipped from execution.")]
     [Test]
-    public async Task Should_Create_A_limit_Order()
+    [Ignore("This test creates a real limit order on the exchange and should only be run manually")]
+    [Category("OrderCreation")]
+    public async Task Should_Create_A_Limit_Order()
     {
         var result = await _service.CreateLimitOrderAsync(new Models.CreateLimitOrderRequest()
         {
@@ -154,9 +179,10 @@ public class Tests
         result.State.Should().Be("active");
     }
 
-    [Ignore("This test creates a real market order on the exchange. Since it would create actual orders each time it runs, it's skipped from execution.")]
     [Test]
-    public async Task Should_Create_A_market_Order()
+    [Ignore("This test creates a real market order on the exchange and should only be run manually")]
+    [Category("OrderCreation")]
+    public async Task Should_Create_A_Market_Order()
     {
         var result = await _service.CreateMarketOrderAsync(new Models.CreateMarketOrderRequest()
         {
@@ -170,8 +196,9 @@ public class Tests
         result.State.Should().Be("active");
     }
 
-    [Ignore("This test creates a real stop-limit order on the exchange. Since it would create actual orders each time it runs, it's skipped from execution.")]
     [Test]
+    [Ignore("This test creates a real stop-limit order on the exchange and should only be run manually")]
+    [Category("OrderCreation")]
     public async Task Should_Create_A_StopLimit_Order()
     {
         var result = await _service.CreateStopLimitOrderAsync(new Models.CreateStopLimitOrderRequest()
@@ -188,9 +215,10 @@ public class Tests
         result.State.Should().Be("initial");
     }
 
-    [Ignore("This test creates a real OCO order on the exchange. Since it would create actual orders each time it runs, it's skipped from execution.")]
     [Test]
-    public async Task Should_Create_A_Oco_Order()
+    [Ignore("This test creates a real OCO order on the exchange and should only be run manually")]
+    [Category("OrderCreation")]
+    public async Task Should_Create_An_Oco_Order()
     {
         var result = await _service.CreateOcoOrderAsync(new Models.CreateOcoOrderRequest()
         {
@@ -208,7 +236,9 @@ public class Tests
     }
 
     [Test]
+    [Category("MarketData")]
     [TestCase("BTC_IRT")]
+    [TestCase("ETH_IRT", Ignore = "Optional test case")]
     public async Task Should_Return_Orderbook_For_A_Symbol(string symbol)
     {
         var result = await _service.GetOrderbookAsync(symbol);
@@ -231,5 +261,28 @@ public class Tests
             bid[0].Should().NotBeNullOrEmpty(); // price
             bid[1].Should().NotBeNullOrEmpty(); // amount
         });
+    }
+
+    [Test]
+    [Category("ErrorHandling")]
+    public async Task Should_Handle_Invalid_Symbol_Gracefully()
+    {
+        // Act
+        Func<Task> act = async () => await _service.GetOrderbookAsync("INVALID_SYMBOL");
+
+        // Assert
+        await act.Should().ThrowAsync<Exception>()
+            .WithMessage("*");
+    }
+
+    [Test]
+    [Category("ErrorHandling")]
+    public async Task Should_Handle_Invalid_Order_Id_Gracefully()
+    {
+        // Act
+        var result = await _service.GetOrderByIdAsync(-1);
+
+        // Assert
+        result.Should().BeNull();
     }
 }
