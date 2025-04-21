@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Shouldly;
 using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics;
 
@@ -48,8 +48,8 @@ public class MarketInfoTests
     {
         var result = await _service.GetCurrenciesListAsync();
 
-        result.Should().NotBeNullOrEmpty();
-        result.Count().Should().Be(expectedCurrenciesCount);
+        result.ShouldNotBeNullOrEmpty();
+        result.Count().ShouldBe(expectedCurrenciesCount);
     }
 
     [Test]
@@ -59,8 +59,8 @@ public class MarketInfoTests
     {
         var result = await _service.GetMarketsListAsync();
 
-        result.Should().NotBeNullOrEmpty();
-        result.Count().Should().Be(expectedMarketsCount);
+        result.ShouldNotBeNullOrEmpty();
+        result.Count().ShouldBe(expectedMarketsCount);
     }
 
     [Test]
@@ -70,8 +70,8 @@ public class MarketInfoTests
     {
         var result = await _service.GetTickersListAsync();
 
-        result.Should().NotBeNullOrEmpty();
-        result.Count().Should().Be(expectedTickersCount);
+        result.ShouldNotBeNullOrEmpty();
+        result.Count().ShouldBe(expectedTickersCount);
     }
 
     [Test]
@@ -80,9 +80,9 @@ public class MarketInfoTests
     {
         var result = await _service.GetTokenAsync();
 
-        result.Should().NotBeNull();
-        result.AccessToken.Should().NotBeNullOrEmpty();
-        result.RefreshToken.Should().NotBeNullOrEmpty();
+        result.ShouldNotBeNull();
+        result.AccessToken.ShouldNotBeNullOrEmpty();
+        result.RefreshToken.ShouldNotBeNullOrEmpty();
     }
 
     [Test]
@@ -91,7 +91,7 @@ public class MarketInfoTests
     {
         var result = await _service.GetWalletsListAsync();
 
-        result.Should().NotBeNullOrEmpty();
+        result.ShouldNotBeNullOrEmpty();
     }
 
     [Test]
@@ -102,7 +102,7 @@ public class MarketInfoTests
     {
         var result = await _service.GetMatchesListAsync(symbol);
 
-        result.Should().NotBeNullOrEmpty();
+        result.ShouldNotBeNullOrEmpty();
     }
 
     [Test]
@@ -112,9 +112,9 @@ public class MarketInfoTests
         var token = await _service.GetTokenAsync();
         var refreshedToken = await _service.RefreshTokenAsync();
 
-        token.Should().NotBeNull();
-        refreshedToken.Should().NotBeNull();
-        token.AccessToken.Should().NotBe(refreshedToken.AccessToken);
+        token.ShouldNotBeNull();
+        refreshedToken.ShouldNotBeNull();
+        token.AccessToken.ShouldNotBe(refreshedToken.AccessToken);
     }
 
     [Test]
@@ -122,7 +122,7 @@ public class MarketInfoTests
     public async Task Should_Return_Completed_Orders()
     {
         var result = await _service.GetCompletedOrdersAsync();
-        result.Should().NotBeEmpty();
+        result.ShouldNotBeEmpty();
     }
 
     [Test]
@@ -130,7 +130,7 @@ public class MarketInfoTests
     public async Task Should_Return_Pending_Orders()
     {
         var result = await _service.GetPendingOrdersAsync();
-        result.Should().BeEmpty();
+        result.ShouldBeEmpty();
     }
 
     [Test]
@@ -139,8 +139,8 @@ public class MarketInfoTests
     {
         var result = await _service.GetOrderListAsync();
 
-        result.Should().NotBeEmpty();
-        result.Count().Should().NotBe(0);
+        result.ShouldNotBeEmpty();
+        result.Count().ShouldNotBe(0);
     }
 
     [Test]
@@ -158,7 +158,7 @@ public class MarketInfoTests
     public async Task Should_Return_An_Order(int orderId)
     {
         var result = await _service.GetOrderByIdAsync(orderId);
-        result.Should().NotBeNull();
+        result.ShouldNotBeNull();
     }
 
     [Test]
@@ -175,8 +175,8 @@ public class MarketInfoTests
             Price=106868,
         });
 
-        result.Should().NotBeNull();
-        result.State.Should().Be("active");
+        result.ShouldNotBeNull();
+        result.State.ShouldBe("active");
     }
 
     [Test]
@@ -192,8 +192,8 @@ public class MarketInfoTests
             Type = "market",
         });
 
-        result.Should().NotBeNull();
-        result.State.Should().Be("active");
+        result.ShouldNotBeNull();
+        result.State.ShouldBe("active");
     }
 
     [Test]
@@ -211,8 +211,8 @@ public class MarketInfoTests
             StopPrice=104000
         });
 
-        result.Should().NotBeNull();
-        result.State.Should().Be("initial");
+        result.ShouldNotBeNull();
+        result.State.ShouldBe("initial");
     }
 
     [Test]
@@ -231,8 +231,8 @@ public class MarketInfoTests
             StopPrice = 106000
         });
 
-        result.Should().NotBeNull();
-        result.State.Should().Be("initial");
+        result.ShouldNotBeNull();
+        result.State.ShouldBe("initial");
     }
 
     [Test]
@@ -243,23 +243,23 @@ public class MarketInfoTests
     {
         var result = await _service.GetOrderbookAsync(symbol);
 
-        result.Should().NotBeNull();
-        result.Asks.Should().NotBeNull();
-        result.Bids.Should().NotBeNull();
+        result.ShouldNotBeNull();
+        result.Asks.ShouldNotBeNull();
+        result.Bids.ShouldNotBeNull();
 
         // Verify that both asks and bids contain arrays of price and amount
-        result.Asks.Should().AllSatisfy(ask =>
+        result.Asks.ShouldAllBe(ask =>
         {
-            ask.Should().HaveCount(2);
-            ask[0].Should().NotBeNullOrEmpty(); // price
-            ask[1].Should().NotBeNullOrEmpty(); // amount
+            ask.ShouldHaveSingleItem();
+            ask[0].ShouldNotBeNullOrEmpty(); // price
+            ask[1].ShouldNotBeNullOrEmpty(); // amount
         });
 
-        result.Bids.Should().AllSatisfy(bid =>
+        result.Bids.ShouldAllBe(bid =>
         {
-            bid.Should().HaveCount(2);
-            bid[0].Should().NotBeNullOrEmpty(); // price
-            bid[1].Should().NotBeNullOrEmpty(); // amount
+            bid.ShouldHaveSingleItem();
+            bid[0].ShouldNotBeNullOrEmpty(); // price
+            bid[1].ShouldNotBeNullOrEmpty(); // amount
         });
     }
 
@@ -271,7 +271,7 @@ public class MarketInfoTests
         Func<Task> act = async () => await _service.GetOrderbookAsync("INVALID_SYMBOL");
 
         // Assert
-        await act.Should().ThrowAsync<Exception>()
+        await act.ShouldThrowAsync<Exception>()
             .WithMessage("*");
     }
 
@@ -283,6 +283,6 @@ public class MarketInfoTests
         var result = await _service.GetOrderByIdAsync(-1);
 
         // Assert
-        result.Should().BeNull();
+        result.ShouldBeNull();
     }
 }
