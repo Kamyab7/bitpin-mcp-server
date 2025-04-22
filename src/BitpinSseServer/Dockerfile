@@ -31,6 +31,6 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-ENV ASPNETCORE_Kestrel__Endpoints__Https__Url=http://+:80
+ENV ASPNETCORE_Kestrel__Endpoints__Https__Url=http://+:8081
 
 ENTRYPOINT ["dotnet", "BitpinSseServer.dll"]
