@@ -4,3 +4,7 @@ services:
     build:
       context: .
       dockerfile: src/BitpinSseServer/Dockerfile
+    environment:
+        BITPIN_API_KEY: ${BITPIN_API_KEY}
+        BITPIN_API_SECRET: ${BITPIN_API_SECRET}
+        BITPIN_API_URL: ${BITPIN_API_URL}
