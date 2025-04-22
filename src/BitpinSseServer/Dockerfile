@@ -30,4 +30,12 @@ RUN dotnet publish "./BitpinSseServer.csproj" -c $BUILD_CONFIGURATION -o /app/pu
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+# Add HTTPS certificate
+COPY https/aspnetapp.pfx /https/aspnetapp.pfx
+ENV ASPNETCORE_Kestrel__Endpoints__Https__Url=https://+:8081
+ENV ASPNETCORE_Kestrel__Endpoints__Https__Certificate__Path=/https/aspnetapp.pfx
+ENV ASPNETCORE_Kestrel__Endpoints__Https__Certificate__Password=YourStrongPassword
+
+
 ENTRYPOINT ["dotnet", "BitpinSseServer.dll"]
