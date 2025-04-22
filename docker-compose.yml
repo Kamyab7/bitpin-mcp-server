@@ -1,0 +1,6 @@
+services:
+  bitpinsseserver:
+    image: ${DOCKER_REGISTRY-}bitpinsseserver
+    build:
+      context: .
+      dockerfile: src/BitpinSseServer/Dockerfile
