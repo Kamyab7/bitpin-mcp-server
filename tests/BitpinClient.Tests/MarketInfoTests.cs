@@ -48,7 +48,8 @@ public class MarketInfoTests
     {
         var result = await _service.GetCurrenciesListAsync();
 
-        result.ShouldNotBeNullOrEmpty();
+        result.ShouldNotBeNull();
+        result.ShouldNotBeEmpty();
         result.Count().ShouldBe(expectedCurrenciesCount);
     }
 
@@ -59,7 +60,8 @@ public class MarketInfoTests
     {
         var result = await _service.GetMarketsListAsync();
 
-        result.ShouldNotBeNullOrEmpty();
+        result.ShouldNotBeNull();
+        result.ShouldNotBeEmpty();
         result.Count().ShouldBe(expectedMarketsCount);
     }
 
@@ -70,7 +72,8 @@ public class MarketInfoTests
     {
         var result = await _service.GetTickersListAsync();
 
-        result.ShouldNotBeNullOrEmpty();
+        result.ShouldNotBeNull();
+        result.ShouldNotBeEmpty();
         result.Count().ShouldBe(expectedTickersCount);
     }
 
@@ -91,7 +94,8 @@ public class MarketInfoTests
     {
         var result = await _service.GetWalletsListAsync();
 
-        result.ShouldNotBeNullOrEmpty();
+        result.ShouldNotBeNull();
+        result.ShouldNotBeEmpty();
     }
 
     [Test]
@@ -102,7 +106,8 @@ public class MarketInfoTests
     {
         var result = await _service.GetMatchesListAsync(symbol);
 
-        result.ShouldNotBeNullOrEmpty();
+        result.ShouldNotBeNull();
+        result.ShouldNotBeEmpty();
     }
 
     [Test]
@@ -248,19 +253,19 @@ public class MarketInfoTests
         result.Bids.ShouldNotBeNull();
 
         // Verify that both asks and bids contain arrays of price and amount
-        result.Asks.ShouldAllBe(ask =>
+        foreach (var ask in result.Asks)
         {
-            ask.ShouldHaveSingleItem();
+            ask.Count.ShouldBe(2); // Checking there are exactly two items (price and amount)
             ask[0].ShouldNotBeNullOrEmpty(); // price
             ask[1].ShouldNotBeNullOrEmpty(); // amount
-        });
+        }
 
-        result.Bids.ShouldAllBe(bid =>
+        foreach (var bid in result.Bids)
         {
-            bid.ShouldHaveSingleItem();
+            bid.Count.ShouldBe(2); // Checking there are exactly two items (price and amount)
             bid[0].ShouldNotBeNullOrEmpty(); // price
             bid[1].ShouldNotBeNullOrEmpty(); // amount
-        });
+        }
     }
 
     [Test]
@@ -271,8 +276,8 @@ public class MarketInfoTests
         Func<Task> act = async () => await _service.GetOrderbookAsync("INVALID_SYMBOL");
 
         // Assert
-        await act.ShouldThrowAsync<Exception>()
-            .WithMessage("*");
+        var exception = await Should.ThrowAsync<Exception>(act);
+        exception.Message.ShouldContain("*");
     }
 
     [Test]
