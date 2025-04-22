@@ -13,6 +13,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCPServer", "src\MCPServer\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitpinClient.Tests", "tests\BitpinClient.Tests\BitpinClient.Tests.csproj", "{0905B3E8-BE10-4E31-BC31-7F3BB62C46A4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		bitpin-mcp-banner.svg = bitpin-mcp-banner.svg
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,5 +49,8 @@ Global
 		{AA653A29-CE96-49DD-BF0E-D928509306B0} = {C0741CD0-2983-4BC4-AD63-E4A3B79EF29D}
 		{EF182E35-02ED-4FE9-8D2B-0AFC054FCBBA} = {C0741CD0-2983-4BC4-AD63-E4A3B79EF29D}
 		{0905B3E8-BE10-4E31-BC31-7F3BB62C46A4} = {B9353C89-1D7D-4D2F-83A9-2187CE7791D7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E92E0994-6B27-4389-B671-20CAFC9A27CE}
 	EndGlobalSection
 EndGlobal

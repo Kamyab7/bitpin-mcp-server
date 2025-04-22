@@ -1,17 +1,20 @@
 <Project>
-  <ItemGroup>
-    <PackageReference Update="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
-    <PackageReference Update="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.3" />
-    <PackageReference Update="Microsoft.Extensions.Http.Polly" Version="9.0.3" />
-    <PackageReference Update="Microsoft.Extensions.Http.Resilience" Version="9.3.0" />
-    <PackageReference Update="Polly" Version="8.5.2" />
-    <PackageReference Update="coverlet.collector" Version="6.0.2" />
-    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="17.11.1" />
-    <PackageReference Update="NUnit" Version="4.2.2" />
-    <PackageReference Update="NUnit.Analyzers" Version="4.3.0" />
-    <PackageReference Update="NUnit3TestAdapter" Version="4.6.0" />
-    <PackageReference Update="Shouldly" Version="4.0.0" />
-    <PackageReference Update="Microsoft.Extensions.Hosting" Version="9.0.3" />
-    <PackageReference Update="ModelContextProtocol" Version="0.1.0-preview.10" />
-  </ItemGroup>
+	<PropertyGroup>
+		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
+		<PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.3" />
+		<PackageVersion Include="Microsoft.Extensions.Http.Polly" Version="9.0.3" />
+		<PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="9.3.0" />
+		<PackageVersion Include="Polly" Version="8.5.2" />
+		<PackageVersion Include="coverlet.collector" Version="6.0.2" />
+		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+		<PackageVersion Include="NUnit" Version="4.2.2" />
+		<PackageVersion Include="NUnit.Analyzers" Version="4.3.0" />
+		<PackageVersion Include="NUnit3TestAdapter" Version="4.6.0" />
+		<PackageVersion Include="Shouldly" Version="4.0.0" />
+		<PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.3" />
+		<PackageVersion Include="ModelContextProtocol" Version="0.1.0-preview.10" />
+	</ItemGroup>
 </Project>
