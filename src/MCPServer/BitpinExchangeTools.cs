@@ -6,7 +6,7 @@ using System.ComponentModel;
 namespace MCPServer;
 
 [McpServerToolType]
-public class BitpinExchangeTools
+internal sealed class BitpinExchangeTools
 {
     private readonly BitpinClientService _bitpinClientService;
 

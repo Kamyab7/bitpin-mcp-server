@@ -4,7 +4,7 @@ using Polly.Retry;
 
 namespace BitpinClient;
 
-public static class DependencyInjection
+public static class BitpinClientRegistry
 {
     public static IServiceCollection AddBitpinClient(this IServiceCollection services, BitpinClientSettings settings)
     {
