@@ -55,24 +55,24 @@ The MCP server provides the following tools:
    Add the MCP server configuration to your application settings:
 
    ```json
-{
-  "mcpServers": {
-      "BitpinExchange": {
-          "command": "dotnet",
-          "args": [
-              "run",
-              "--project",
-              "D:\\projects\\bitpin-mcp-server\\src\\MCPServer\\MCPServer.csproj",
-              "--no-build"
-          ],
-          "env": {
-            "BITPIN_API_KEY": "****",
-            "BITPIN_API_SECRET": "****",
-            "BITPIN_API_URL": "https://api.bitpin.org/api/v1/"
-          }
-      }
-  }
-}
+    {
+        "mcpServers": {
+            "BitpinExchange": {
+                "command": "dotnet",
+                "args": [
+                    "run",
+                    "--project",
+                    "D:\\projects\\bitpin-mcp-server\\src\\MCPServer\\MCPServer.csproj",
+                    "--no-build"
+                ],
+                "env": {
+                    "BITPIN_API_KEY": "****",
+                    "BITPIN_API_SECRET": "****",
+                    "BITPIN_API_URL": "https://api.bitpin.org/api/v1/"
+                }
+            }
+        }
+    }
    ```
 
 4. **Configure Services in `Program.cs`**
