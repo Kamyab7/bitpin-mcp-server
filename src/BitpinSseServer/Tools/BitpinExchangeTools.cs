@@ -3,7 +3,7 @@ using BitpinClient.Models;
 using ModelContextProtocol.Server;
 using System.ComponentModel;
 
-namespace MCPServer;
+namespace BitpinSseServer.Tools;
 
 [McpServerToolType]
 internal sealed class BitpinExchangeTools

@@ -13,9 +13,9 @@ public class BitpinClientService
 
     public BitpinClientService(BitpinClientSettings bitpinClientSettings)
     {
-        _httpClient.BaseAddress = new Uri("https://api.bitpin.org/api/v1/");
         _httpClient.Timeout = TimeSpan.FromSeconds(10);
         _settings = bitpinClientSettings;
+        _httpClient.BaseAddress = _settings.ApiUrl;
     }
 
     public async Task<IEnumerable<Market>?> GetMarketsListAsync()
@@ -86,61 +86,65 @@ public class BitpinClientService
 
     private async Task<TResponse?> RequestHandlerAsync<TResponse>(HttpMethod httpMethod, string url, bool accessTokenRequired = false)
     {
-        var request = new HttpRequestMessage(httpMethod, url);
-
-        if (accessTokenRequired)
+        using (var request = new HttpRequestMessage(httpMethod, url))
         {
-            var token = await TokenHandlerAsync();
-            request.Headers.Add("Authorization", $"Bearer {token}");
+            if (accessTokenRequired)
+            {
+                var token = await TokenHandlerAsync();
+                request.Headers.Add("Authorization", $"Bearer {token}");
+            }
+
+            var response = await _httpClient.SendAsync(request);
+
+            response.EnsureSuccessStatusCode();
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<TResponse>(responseContent);
         }
-
-        var response = await _httpClient.SendAsync(request);
-
-        response.EnsureSuccessStatusCode();
-
-        var responseContent = await response.Content.ReadAsStringAsync();
-
-        return JsonSerializer.Deserialize<TResponse>(responseContent);
     }
 
     private async Task<TResponse?> RequestHandlerAsync<TResponse, TRequest>(HttpMethod httpMethod, string url, TRequest requestbody, bool accessTokenRequired = false)
     {
-        var requestBody = JsonSerializer.Serialize(requestbody);
+        var requestBody = JsonSerializer.Serialize(requestbody);    
 
-        var content = new StringContent(requestBody, null, "application/json");
-
-        var request = new HttpRequestMessage(httpMethod, url);
-
-        if (accessTokenRequired)
+        using (var request = new HttpRequestMessage(httpMethod, url))
         {
-            var token = await TokenHandlerAsync();
-            request.Headers.Add("Authorization", $"Bearer {token}");
+            using (var content = new StringContent(requestBody, null, "application/json"))
+            {
+                if (accessTokenRequired)
+                {
+                    var token = await TokenHandlerAsync();
+                    request.Headers.Add("Authorization", $"Bearer {token}");
+                }
+
+                request.Content = content;
+
+                var response = await _httpClient.SendAsync(request);
+
+                response.EnsureSuccessStatusCode();
+
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<TResponse>(responseContent);
+            }
         }
-
-        request.Content = content;
-
-        var response = await _httpClient.SendAsync(request);
-
-        response.EnsureSuccessStatusCode();
-
-        var responseContent = await response.Content.ReadAsStringAsync();
-
-        return JsonSerializer.Deserialize<TResponse>(responseContent);
     }
 
     private async Task RequestHandlerAsync(HttpMethod httpMethod, string url, bool accessTokenRequired = false)
     {
-        var request = new HttpRequestMessage(httpMethod, url);
-
-        if (accessTokenRequired)
+        using (var request = new HttpRequestMessage(httpMethod, url))
         {
-            var token = await TokenHandlerAsync();
-            request.Headers.Add("Authorization", $"Bearer {token}");
+            if (accessTokenRequired)
+            {
+                var token = await TokenHandlerAsync();
+                request.Headers.Add("Authorization", $"Bearer {token}");
+            }
+
+            var response = await _httpClient.SendAsync(request);
+
+            response.EnsureSuccessStatusCode();
         }
-
-        var response = await _httpClient.SendAsync(request);
-
-        response.EnsureSuccessStatusCode();
     }
 
     private async Task<string> TokenHandlerAsync()

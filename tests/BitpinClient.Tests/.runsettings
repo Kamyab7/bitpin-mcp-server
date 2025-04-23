@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+	<BITPIN_API_KEY></BITPIN_API_KEY>>
+	<BITPIN_API_SECRET></BITPIN_API_SECRET>
+	<BITPIN_API_URL>https://api.bitpin.org/api/v1/</BITPIN_API_URL>
+</RunSettings>
