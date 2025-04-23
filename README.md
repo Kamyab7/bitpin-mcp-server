@@ -1,3 +1,5 @@
+[![Build Status](https://github.com/kamyab7/bitpin-mcp-server/actions/workflows/build.yml/badge.svg)](https://github.com/kamyab7/bitpin-mcp-server/actions/workflows/build.yml)
+
 ![Bitpin Exchange MCP Server Tools](bitpin-mcp-banner.svg)
 
 This repository provides an MCP server implementation for the Bitpin cryptocurrency exchange. The server exposes several tools for interacting with the Bitpin API, such as retrieving wallet balances, market data, order details, and executing various types of orders like limit orders, market orders, stop-limit orders, and OCO (One Cancels the Other) orders.
