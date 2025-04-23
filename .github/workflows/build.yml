@@ -22,8 +22,11 @@ jobs:
       with:
         dotnet-version: '9.0.x'
 
-    - name: Restore dependencies
-      run: dotnet restore
+    - name: Restore all dependencies
+      run: |
+        for file in $(find . -name '*.sln' -o -name '*.csproj'); do
+          dotnet restore "$file"
+        done
 
     - name: Build all projects
       run: |
