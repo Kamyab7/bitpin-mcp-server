@@ -34,5 +34,8 @@ jobs:
           dotnet build "$file" --configuration Release
         done
 
-    - name: Publish project
-      run: dotnet publish --configuration Release --output ./output
+    - name: Publish all projects
+      run: |
+        for file in $(find . -name '*.sln' -o -name '*.csproj'); do
+          dotnet publish "$file" --configuration Release --output ./output/$(basename "$file" .sln)
+        done
