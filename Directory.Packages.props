@@ -20,7 +20,7 @@
     <PackageVersion Include="NUnit" Version="4.2.2" />
     <PackageVersion Include="NUnit.Analyzers" Version="4.3.0" />
     <PackageVersion Include="NUnit3TestAdapter" Version="5.0.0" />
-    <PackageVersion Include="Shouldly" Version="4.0.0" />
+    <PackageVersion Include="Shouldly" Version="4.3.0" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.3" />
     <PackageVersion Include="ModelContextProtocol" Version="0.1.0-preview.10" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.8.0.113526" />
