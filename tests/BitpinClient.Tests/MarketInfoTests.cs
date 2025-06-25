@@ -1,6 +1,7 @@
 ﻿using Shouldly;
 using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics;
+using Bitpin.Client;
 
 namespace BitpinClient.Tests;
 
@@ -171,7 +172,7 @@ internal sealed class MarketInfoTests
     [Category("OrderCreation")]
     public async Task ShouldCreateLimitOrder()
     {
-        var result = await _service.CreateLimitOrderAsync(new Models.CreateLimitOrderRequest()
+        var result = await _service.CreateLimitOrderAsync(new Bitpin.Client.Models.CreateLimitOrderRequest()
         {
             Symbol= "USDT_IRT",
             BaseAmount=1,
@@ -189,7 +190,7 @@ internal sealed class MarketInfoTests
     [Category("OrderCreation")]
     public async Task ShouldCreateMarketOrder()
     {
-        var result = await _service.CreateMarketOrderAsync(new Models.CreateMarketOrderRequest()
+        var result = await _service.CreateMarketOrderAsync(new Bitpin.Client.Models.CreateMarketOrderRequest()
         {
             Symbol = "USDT_IRT",
             BaseAmount = 1,
@@ -206,7 +207,7 @@ internal sealed class MarketInfoTests
     [Category("OrderCreation")]
     public async Task ShouldCreateStopLimitOrder()
     {
-        var result = await _service.CreateStopLimitOrderAsync(new Models.CreateStopLimitOrderRequest()
+        var result = await _service.CreateStopLimitOrderAsync(new Bitpin.Client.Models.CreateStopLimitOrderRequest()
         {
             Symbol = "USDT_IRT",
             BaseAmount = 1,
@@ -225,7 +226,7 @@ internal sealed class MarketInfoTests
     [Category("OrderCreation")]
     public async Task ShouldCreateOcoOrder()
     {
-        var result = await _service.CreateOcoOrderAsync(new Models.CreateOcoOrderRequest()
+        var result = await _service.CreateOcoOrderAsync(new Bitpin.Client.Models.CreateOcoOrderRequest()
         {
             Symbol = "USDT_IRT",
             BaseAmount = 1,

@@ -1,7 +1,7 @@
-﻿using BitpinClient.Models;
+﻿using Bitpin.Client.Models;
 using System.Text.Json;
 
-namespace BitpinClient;
+namespace Bitpin.Client;
 
 public class BitpinClientService
 {

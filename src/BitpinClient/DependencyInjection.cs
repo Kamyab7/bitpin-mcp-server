@@ -2,7 +2,7 @@
 using Polly;
 using Polly.Retry;
 
-namespace BitpinClient;
+namespace Bitpin.Client;
 
 public static class BitpinClientRegistry
 {

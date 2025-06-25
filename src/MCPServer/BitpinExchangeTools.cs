@@ -1,5 +1,5 @@
-﻿using BitpinClient;
-using BitpinClient.Models;
+﻿using Bitpin.Client;
+using Bitpin.Client.Models;
 using ModelContextProtocol.Server;
 using System.ComponentModel;
 

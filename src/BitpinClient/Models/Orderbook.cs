@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace BitpinClient.Models;
+namespace Bitpin.Client.Models;
 
 public class Orderbook
 {

@@ -10,7 +10,7 @@
     <File Path="README.md" />
   </Folder>
   <Folder Name="/src/">
-    <Project Path="src/BitpinClient/BitpinClient.csproj" />
+    <Project Path="src/BitpinClient/Bitpin.Client.csproj" />
     <Project Path="src/MCPServer/MCPServer.csproj" />
   </Folder>
   <Folder Name="/tests/">

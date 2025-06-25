@@ -1,4 +1,4 @@
-﻿namespace BitpinClient;
+﻿namespace Bitpin.Client;
 
 public class BitpinClientSettings
 {
