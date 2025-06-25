@@ -1,9 +1,8 @@
 ﻿using Shouldly;
 using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics;
-using Bitpin.Client;
 
-namespace BitpinClient.Tests;
+namespace Bitpin.Client.Tests;
 
 internal sealed class MarketInfoTests
 {

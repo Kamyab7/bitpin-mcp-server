@@ -15,6 +15,6 @@
     <Project Path="src/Bitpin.McpTools.Client/Bitpin.McpTools.Client.csproj" Id="03644c72-465b-48b3-af18-256a7666ae23" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="tests/BitpinClient.Tests/BitpinClient.Tests.csproj" />
+    <Project Path="tests/Bitpin.Client.Tests/Bitpin.Client.Tests.csproj" />
   </Folder>
 </Solution>
