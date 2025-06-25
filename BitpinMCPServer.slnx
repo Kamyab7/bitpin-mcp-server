@@ -11,13 +11,9 @@
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/BitpinClient/BitpinClient.csproj" />
-    <Project Path="src/BitpinSseServer/BitpinSseServer.csproj" />
     <Project Path="src/MCPServer/MCPServer.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/BitpinClient.Tests/BitpinClient.Tests.csproj" />
   </Folder>
-  <Project Path="docker-compose.dcproj">
-    <Build />
-  </Project>
 </Solution>
