@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\BitpinClient\Bitpin.Client.csproj" />
+    <ProjectReference Include="..\..\src\Bitpin.Client\Bitpin.Client.csproj" />
   </ItemGroup>
 
   <ItemGroup>

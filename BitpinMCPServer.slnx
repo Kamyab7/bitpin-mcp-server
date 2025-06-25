@@ -10,8 +10,9 @@
     <File Path="README.md" />
   </Folder>
   <Folder Name="/src/">
-    <Project Path="src/BitpinClient/Bitpin.Client.csproj" />
-    <Project Path="src/MCPServer/Bitpin.McpServer.csproj" />
+    <Project Path="src/Bitpin.Client/Bitpin.Client.csproj" />
+    <Project Path="src/Bitpin.McpServer/Bitpin.McpServer.csproj" />
+    <Project Path="src/Bitpin.McpTools.Client/Bitpin.McpTools.Client.csproj" Id="03644c72-465b-48b3-af18-256a7666ae23" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/BitpinClient.Tests/BitpinClient.Tests.csproj" />
