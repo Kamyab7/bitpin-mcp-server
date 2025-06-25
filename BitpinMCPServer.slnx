@@ -4,7 +4,6 @@
     <File Path=".env" />
     <File Path=".env.template" />
     <File Path=".gitignore" />
-    <File Path="bitpin-mcp-banner.svg" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
     <File Path="LICENSE" />
