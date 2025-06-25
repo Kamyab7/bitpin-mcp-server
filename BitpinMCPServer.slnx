@@ -11,7 +11,7 @@
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/BitpinClient/Bitpin.Client.csproj" />
-    <Project Path="src/MCPServer/MCPServer.csproj" />
+    <Project Path="src/MCPServer/Bitpin.McpServer.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/BitpinClient.Tests/BitpinClient.Tests.csproj" />
